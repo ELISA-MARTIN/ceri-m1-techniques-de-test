@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ceri-m1-techniques-de-test:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>ceri-m1-techniques-de-test</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="tp1.war">
+      <element id="artifact" artifact-name="ceri-m1-techniques-de-test:war exploded" />
+    </root>
+  </artifact>
+</component>
