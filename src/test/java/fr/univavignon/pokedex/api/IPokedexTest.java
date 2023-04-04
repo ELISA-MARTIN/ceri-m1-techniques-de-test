@@ -35,10 +35,10 @@ public class IPokedexTest {
         pokedex.addPokemon(pokemon1);
         pokedex.addPokemon(pokemon2);
 
-        assertEquals(pokemon1, pokedex.getPokemon(1));
-        assertEquals(pokemon2, pokedex.getPokemon(2));
+        assertEquals(pokemon1, pokedex.getPokemon(0));
+        assertEquals(pokemon2, pokedex.getPokemon(1));
         assertThrows(PokedexException.class, () -> {
-            pokedex.getPokemon(3);
+            pokedex.getPokemon(2);
         });
     }
 

@@ -31,10 +31,13 @@ public class IPokemonMetadataProviderTest {
 
     // Vérifie que la fonction retorune bien un PokemonMetadata
     @Test
-    public void testCreatePokemonMetadataProvider() {
-        IPokemonMetadataProvider pokemonMetadataProvider = Mockito.mock(IPokemonMetadataProvider.class);
+    public void testGetPokemonMetadata() throws PokedexException {
+        int index = 25;
+        IPokemonMetadataProvider metadataProviderMock = Mockito.mock(IPokemonMetadataProvider.class);
+        PokemonMetadata expectedMetadata = new PokemonMetadata(index, "Pikachu", 4, 4, 4);
+        Mockito.when(metadataProviderMock.getPokemonMetadata(index)).thenReturn(expectedMetadata);
 
-        assertNotNull(pokemonMetadataProvider);
-        assertTrue(pokemonMetadataProvider instanceof PokemonMetadata); // Vérifie que l'objet retourné est bien une instance de PokemonMetadata
+        PokemonMetadata actualMetadata = metadataProviderMock.getPokemonMetadata(index);
+        assertEquals(expectedMetadata, actualMetadata);
     }
 }
