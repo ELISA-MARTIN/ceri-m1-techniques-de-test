@@ -79,8 +79,8 @@ public class IPokemonFactoryTest {
     public void perfectionTestIsBetween0And15() {
         final double iv = 18;
         assertThrows(IllegalArgumentException.class, () -> {
-            if(iv < 0 || iv > 150) {
-                throw new IllegalArgumentException("La défense doit être comprise entre 0 et 15 inclus.");
+            if(iv < 0 || iv > 100) {
+                throw new IllegalArgumentException("La perfection doit être comprise entre 0 et 100 %.");
             }
         });
     }
