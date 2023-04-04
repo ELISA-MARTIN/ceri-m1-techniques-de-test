@@ -12,9 +12,9 @@ import org.mockito.Mockito;
 
 public class IPokemonTrainerFactoryTest {
 
-    public IPokemonTrainerFactory getMock() {
+    /* public IPokemonTrainerFactory getMock() {
         return Mockito.mock(IPokemonTrainerFactory.class);
-    }
+    } */
 
     // A voir si on garde + tard (pour l(instant inutile)
     @Before
@@ -43,13 +43,6 @@ public class IPokemonTrainerFactoryTest {
     }
 
     @Test
-    public void parseIntThrowsExceptionWhenNotANumber() throws Exception {
-        assertThrows(NumberFormatException.class, () -> {
-            Integer.parseInt("not a number");
-        });
-    }
-
-    @Test
     public void testCreateTrainerWithNullName() {
         // crée un objet mock pour l'interface IPokemonTrainerFactory en utilisant Mockito
         IPokemonTrainerFactory trainerFactoryMock = Mockito.mock(IPokemonTrainerFactory.class);
@@ -58,13 +51,6 @@ public class IPokemonTrainerFactoryTest {
         // vérifié si l'exception IllegalArgumentException est levée en utilisant la méthode assertThrows de JUnit
         assertThrows(IllegalArgumentException.class, () -> {
             trainerFactoryMock.createTrainer(null, Team.MYSTIC);
-        });
-    }
-
-    @Test
-    public void testParseIntThrowsExceptionWhenNotANumber() {
-        assertThrows(NumberFormatException.class, () -> {
-            Integer.parseInt("not a number");
         });
     }
 }
