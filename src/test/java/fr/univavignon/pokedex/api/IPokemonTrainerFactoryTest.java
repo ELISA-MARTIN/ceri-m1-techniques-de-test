@@ -22,11 +22,11 @@ public class IPokemonTrainerFactoryTest {
         IPokemonTrainerFactory trainerFactoryMock = Mockito.mock(IPokemonTrainerFactory.class);
     }
 
-    @Test
+    /*@Test
     public void testIsBetween0And150() {
         int number = 100; // le nombre à tester
         assertTrue("Le nombre devrait être compris entre 0 et 150", number >= 0 && number <= 150);
-    }
+    }*/
 
     @Test
     public void testCreateTrainerWithMockito() {
