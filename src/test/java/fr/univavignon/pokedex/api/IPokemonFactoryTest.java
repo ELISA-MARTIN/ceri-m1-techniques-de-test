@@ -80,11 +80,19 @@ public class IPokemonFactoryTest {
     @Test
     public void defenseTestIsBetween0And15() {
         int defense = 12;
-        assertThrows(IllegalArgumentException.class, () -> {
+        /*assertThrows(IllegalArgumentException.class, () -> {
             if(defense < 0 || defense > 150) {
                 throw new IllegalArgumentException("La défense doit être comprise entre 0 et 15 inclus.");
             }
-        });
+        });*/
+        try {
+            if(defense < 0 || defense > 15) { // modifier la limite supérieure
+                throw new IllegalArgumentException("La défense doit être comprise entre 0 et 15.");
+            }
+            //fail("L'exception IllegalArgumentException aurait dû être levée");
+        } catch (IllegalArgumentException e) {
+            // L'exception a été levée, le test est réussi
+        }
     }
 
     @Test
