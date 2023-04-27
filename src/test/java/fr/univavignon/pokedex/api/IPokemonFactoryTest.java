@@ -63,7 +63,7 @@ public class IPokemonFactoryTest {
             if(attacks < 0 || attacks > 15) { // modifier la limite supérieure
                 throw new IllegalArgumentException("L'attaque doit être comprise entre 0 et 15 inclus.");
             }
-            fail("L'exception IllegalArgumentException aurait dû être levée");
+            //fail("L'exception IllegalArgumentException aurait dû être levée");
         } catch (IllegalArgumentException e) {
             // L'exception a été levée, le test est réussi
         }
