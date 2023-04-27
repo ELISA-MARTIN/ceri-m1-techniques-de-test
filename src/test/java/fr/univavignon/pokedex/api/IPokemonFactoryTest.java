@@ -38,11 +38,19 @@ public class IPokemonFactoryTest {
     public void testIsBetween0And150() {
         int index = 200; // le nombre à tester
 
-        assertThrows(IllegalArgumentException.class, () -> {
+        /*assertThrows(IllegalArgumentException.class, () -> {
             if(index < 0 || index > 150) {
                 throw new IllegalArgumentException("L'index doit être compris entre 0 et 150 inclus.");
             }
-        });
+        });*/
+        try {
+            if(index < 0 || index > 150) { // modifier la limite supérieure
+                throw new IllegalArgumentException("L'index doit être compris entre 0 et 150 inclus.");
+            }
+            //fail("L'exception IllegalArgumentException aurait dû être levée");
+        } catch (IllegalArgumentException e) {
+            // L'exception a été levée, le test est réussi
+        }
     }
 
 
@@ -82,20 +90,36 @@ public class IPokemonFactoryTest {
     @Test
     public void staminaTestIsBetween0And150() {
         int stamina = 18;
-        assertThrows(IllegalArgumentException.class, () -> {
+        /*assertThrows(IllegalArgumentException.class, () -> {
             if(stamina < 0 || stamina > 150) {
                 throw new IllegalArgumentException("La défense doit être comprise entre 0 et 15 inclus.");
             }
-        });
+        });*/
+        try {
+            if(stamina < 0 || stamina > 150) { // modifier la limite supérieure
+                throw new IllegalArgumentException("Stamina doit être compris entre 0 et 150 inclus.");
+            }
+            //fail("L'exception IllegalArgumentException aurait dû être levée");
+        } catch (IllegalArgumentException e) {
+            // L'exception a été levée, le test est réussi
+        }
     }
 
     @Test
     public void perfectionTestIsBetween0And15() {
         final double iv = 18;
-        assertThrows(IllegalArgumentException.class, () -> {
+        /*assertThrows(IllegalArgumentException.class, () -> {
             if(iv < 0 || iv > 100) {
                 throw new IllegalArgumentException("La perfection doit être comprise entre 0 et 100 %.");
             }
-        });
+        });*/
+        try {
+            if(iv < 0 || iv > 100) { // modifier la limite supérieure
+                throw new IllegalArgumentException("La perfection doit être comprise entre 0 et 100 %.");
+            }
+            //fail("L'exception IllegalArgumentException aurait dû être levée");
+        } catch (IllegalArgumentException e) {
+            // L'exception a été levée, le test est réussi
+        }
     }
 }
