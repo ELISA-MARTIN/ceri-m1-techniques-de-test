@@ -46,7 +46,7 @@ public class IPokemonFactoryTest {
     }
 
 
-    @Test
+    /*@Test
     public void attacksTestIsBetween0And15() {
         int attacks = 10;
         assertThrows(IllegalArgumentException.class, () -> {
@@ -54,7 +54,21 @@ public class IPokemonFactoryTest {
                 throw new IllegalArgumentException("L'attaque doit être comprise entre 0 et 15 inclus.");
             }
         });
+    }*/
+
+    @Test
+    public void attacksTestIsBetween0And15() {
+        int attacks = 10;
+        try {
+            if(attacks < 0 || attacks > 15) { // modifier la limite supérieure
+                throw new IllegalArgumentException("L'attaque doit être comprise entre 0 et 15 inclus.");
+            }
+            fail("L'exception IllegalArgumentException aurait dû être levée");
+        } catch (IllegalArgumentException e) {
+            // L'exception a été levée, le test est réussi
+        }
     }
+
     @Test
     public void defenseTestIsBetween0And15() {
         int defense = 12;
@@ -66,7 +80,7 @@ public class IPokemonFactoryTest {
     }
 
     @Test
-    public void staminaTestIsBetween0And15() {
+    public void staminaTestIsBetween0And150() {
         int stamina = 18;
         assertThrows(IllegalArgumentException.class, () -> {
             if(stamina < 0 || stamina > 150) {

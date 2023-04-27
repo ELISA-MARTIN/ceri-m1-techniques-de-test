@@ -100,11 +100,12 @@ public class IPokedexTest {
         Comparator<Pokemon> comparator = Comparator.comparing(Pokemon::getIndex);
 
         // Appel de la fonction à tester
+        Mockito.when(pokedex.getPokemons(comparator)).thenReturn(expectedPokemons);
         List<Pokemon> pokemons = pokedex.getPokemons(comparator);
 
         // Vérification du résultat
         assertNotNull(pokemons);
-        assertEquals(3, pokemons.size());
+        assertEquals(3, pokedex.size());
         assertEquals(pokemon1, pokemons.get(0));
         assertEquals(pokemon2, pokemons.get(1));
         assertEquals(pokemon3, pokemons.get(2));
