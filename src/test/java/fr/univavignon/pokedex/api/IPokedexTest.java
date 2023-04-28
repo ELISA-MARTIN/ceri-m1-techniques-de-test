@@ -29,64 +29,6 @@ public class IPokedexTest {
         }
     }
 
-    // Vérifier que le pokemon a bien été ajouté
-    /*@Test
-    public void testAddPokemon() {
-        IPokedex pokedex = Mockito.mock(IPokedex.class);
-        Pokemon pokemon = Mockito.mock(Pokemon.class);
-
-        // Configuration du mock pour que getPokemons renvoie une liste vide
-        Mockito.when(pokedex.getPokemons()).thenReturn(new ArrayList<>());
-        assertEquals(0, pokedex.getPokemons().size());
-
-        Mockito.when(pokedex.addPokemon(pokemon)).thenReturn();
-        int id = pokedex.addPokemon(pokemon);
-        assertEquals(1, id);
-        assertEquals(1, pokedex.getPokemons().size());
-    }*/
-
-    @Test
-    public void testAddPokemon() {
-        IPokedex pokedex = Mockito.mock(IPokedex.class);
-        Pokemon pokemon = Mockito.mock(Pokemon.class);
-
-        Mockito.when(pokedex.getPokemons()).thenReturn(new ArrayList<>());
-
-        // Vérifier que la méthode addPokemon a été appelée
-        Mockito.verify(pokedex).addPokemon(pokemon);
-
-
-        // Définir la réponse par défaut pour la méthode getPokemons
-        List<Pokemon> pokemonList = new ArrayList<Pokemon>();
-        pokemonList.add(pokemon);
-        Mockito.when(pokedex.getPokemons()).thenReturn(pokemonList);
-
-        // Vérifier que la liste de Pokémon retournée par la méthode getPokemons contient bien le Pokemon
-        List<Pokemon> returnedList = pokedex.getPokemons();
-        assertTrue(returnedList.contains(pokemon));
-
-        // Vérifier que la méthode getPokemons retourne une liste contenant le Pokemon ajouté
-        List<Pokemon> pokemons = pokedex.getPokemons();
-        assertTrue(pokemons.contains(pokemon));
-    }
-
-    // Tester que la fonction getPokemon lève bien une exception quand on met un indice de pokemon inexistant
-    /*@Test
-    public void testGetPokemonException() throws PokedexException {
-        IPokedex pokedex = Mockito.mock(IPokedex.class);
-        Pokemon pokemon1 = Mockito.mock(Pokemon.class);
-        Pokemon pokemon2 = Mockito.mock(Pokemon.class);
-
-        pokedex.addPokemon(pokemon1);
-        pokedex.addPokemon(pokemon2);
-
-        assertEquals(pokemon1, pokedex.getPokemon(0));
-        assertEquals(pokemon2, pokedex.getPokemon(1));
-        assertThrows(PokedexException.class, () -> {
-            pokedex.getPokemon(2);
-        });
-    }*/
-
     @Test
     public void testIsBetween0And150() {
         int index = 100; // le nombre à tester
@@ -143,5 +85,54 @@ public class IPokedexTest {
         Mockito.verify(pokedex, Mockito.times(1)).getPokemons(comparator);
         Mockito.verify(pokedex, Mockito.times(1)).size();
     }
+
+    // Vérifier que le pokemon a bien été ajouté
+    /*@Test
+    public void testAddPokemon() {
+        IPokedex pokedex = Mockito.mock(IPokedex.class);
+        Pokemon pokemon = Mockito.mock(Pokemon.class);
+
+        // Configuration du mock pour que getPokemons renvoie une liste vide
+        Mockito.when(pokedex.getPokemons()).thenReturn(new ArrayList<>());
+        assertEquals(0, pokedex.getPokemons().size());
+
+        Mockito.when(pokedex.addPokemon(pokemon)).thenReturn();
+        int id = pokedex.addPokemon(pokemon);
+        assertEquals(1, id);
+        assertEquals(1, pokedex.getPokemons().size());
+    }*/
+
+    /*@Test
+    public void testAddPokemon() {
+        IPokedex pokedex = Mockito.mock(IPokedex.class);
+        Pokemon pokemon = Mockito.mock(Pokemon.class);
+
+        Mockito.when(pokedex.getPokemons()).thenReturn(new ArrayList<>());
+
+        // Définir la réponse par défaut pour la méthode getPokemons
+        List<Pokemon> pokemonList = new ArrayList<Pokemon>();
+        pokemonList.add(pokemon);
+        Mockito.when(pokedex.getPokemons()).thenReturn(pokemonList);
+
+        List<Pokemon> pokemons = pokedex.getPokemons();
+        assertTrue(pokemons.contains(pokemon));
+    }*/
+
+    // Tester que la fonction getPokemon lève bien une exception quand on met un indice de pokemon inexistant
+    /*@Test
+    public void testGetPokemonException() throws PokedexException {
+        IPokedex pokedex = Mockito.mock(IPokedex.class);
+        Pokemon pokemon1 = Mockito.mock(Pokemon.class);
+        Pokemon pokemon2 = Mockito.mock(Pokemon.class);
+
+        pokedex.addPokemon(pokemon1);
+        pokedex.addPokemon(pokemon2);
+
+        assertEquals(pokemon1, pokedex.getPokemon(0));
+        assertEquals(pokemon2, pokedex.getPokemon(1));
+        assertThrows(PokedexException.class, () -> {
+            pokedex.getPokemon(2);
+        });
+    }*/
 
 }
