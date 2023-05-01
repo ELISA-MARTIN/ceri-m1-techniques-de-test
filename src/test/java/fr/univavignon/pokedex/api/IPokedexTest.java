@@ -43,8 +43,6 @@ public class IPokedexTest {
         assertEquals(pokemon1.getCandy(), 4);
         //assertEquals(pokemon1.getIv(), 56);
         assertEquals(pokedex.size(), 2);
-
-
     }
 
     @Test
@@ -52,7 +50,7 @@ public class IPokedexTest {
         Pokemon pokemon1 = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56 );
         //Pokemon pokemon2 = new Pokemon(155, "Bulb", 126, 126, 90, 613, 64, 4000, 4, 56 );
 
-        assertTrue("L'index devrait être compris entre 0 et 150", pokemon1.getIndex() < 0 || pokemon1.getIndex() > 150);
+        assertTrue("L'index est bien compris entre 0 et 150", pokemon1.getIndex() >= 0 && pokemon1.getIndex() <= 150);
         //assertTrue("L'index devrait être compris entre 0 et 150", pokemon2.getIndex() < 0 || pokemon2.getIndex() > 150);
     }
 
@@ -95,7 +93,7 @@ public class IPokedexTest {
         Mockito.when(pokedex.getPokemons()).thenReturn(expectedPokemons);
 
         Mockito.verify(pokedex).getPokemons();
-        assertEquals(pokedex, expectedPokemons);
+        assertEquals(pokedex.getPokemons(), expectedPokemons);
     }
 
     @Test
@@ -140,18 +138,22 @@ public class IPokedexTest {
             assertEquals(pokemonMetadata.getDefense(), pokemon.getDefense());
         }
         catch  (PokedexException e) {
-            throw new RuntimeException(e);
+            fail("L'exception ne devrait pas être lancée" + e.getMessage());
         }
     }
 
     @Test
-    public void testCreatePokemon(){
+    public void testCreatePokemon() throws PokedexException {
         IPokemonMetadataProvider pokemonMetadataProvider = Mockito.mock(PokemonMetadataProvider.class);
         IPokemonFactory pokemonFactory = Mockito.mock(PokemonFactory.class);
         Pokedex pokedex = new Pokedex(pokemonMetadataProvider, pokemonFactory);
         try {
-            pokedex.createPokemon(0, 613, 64, 4000, 4);
-            fail("L'exception ne s'est pas lancée");
+            Pokemon pokemon = pokedex.createPokemon(0, 613, 64, 4000, 4);
+            assertEquals(pokemon.getIndex(), 0);
+            assertEquals(pokemon.getCp(), 613);
+            assertEquals(pokemon.getHp(), 64);
+            assertEquals(pokemon.getDust(), 4000);
+            assertEquals(pokemon.getCandy(), 4);
         } catch (PokedexException e) {
             throw new RuntimeException(e);
         }

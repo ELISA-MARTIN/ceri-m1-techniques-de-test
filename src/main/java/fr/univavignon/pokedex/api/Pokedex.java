@@ -37,14 +37,11 @@ public class Pokedex implements IPokedex, IPokemonMetadataProvider {
             if (pokemon.getIndex() == pokemons.get(i).getIndex()) {
                 return -1;
             }
-            else{
-                this.pokemons.add(pokemon);
-                return pokemon.getIndex();
-            }
         }
         this.pokemons.add(pokemon);
         return pokemon.getIndex();
     }
+
     @Override
     public List<Pokemon> getPokemons() {
         return pokemons;
