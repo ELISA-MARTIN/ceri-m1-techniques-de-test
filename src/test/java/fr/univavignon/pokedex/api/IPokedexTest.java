@@ -127,7 +127,7 @@ public class IPokedexTest {
         pokedex.addPokemon(pokemon);
         pokemonMetadata = pokedex.getPokemonMetadata(pokemon.getIndex());
         if(pokemonMetadata == null) {
-            throw new PokedexException("Impossible de créer le Pokemon pour l'index " + pokemon.getIndex());
+            throw new PokedexException("Impossible de créer le Pokemon pour l'index " + pokemon.getIndex() + ". Les métadonnées sont manquantes.");
         }
         assertEquals(pokemonMetadata.getIndex(), pokemon.getIndex());
         assertEquals(pokemonMetadata.getName(), pokemon.getName());
@@ -142,9 +142,11 @@ public class IPokedexTest {
         IPokemonFactory pokemonFactory = Mockito.mock(PokemonFactory.class);
         Pokedex pokedex = new Pokedex(pokemonMetadataProvider, pokemonFactory);
         pokemonFactory.setPokedex(pokedex);
-        Pokemon pokemon = pokedex.createPokemon(0, 613, 64, 4000, 4);
-        if(pokemon  == null) {
-            throw new PokedexException("Impossible de créer le Pokemon");
+        try {
+            Pokemon pokemon = pokedex.createPokemon(0, 613, 64, 4000, 4);
+            //fail("Pas d'exception");
+        } catch (PokedexException e) {
+            throw new RuntimeException(e);
         }
     }
 
