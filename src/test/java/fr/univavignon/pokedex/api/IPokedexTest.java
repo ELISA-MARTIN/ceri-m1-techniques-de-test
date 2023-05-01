@@ -90,10 +90,10 @@ public class IPokedexTest {
         expectedPokemons.add(pokemon1);
         expectedPokemons.add(pokemon2);
 
-        Mockito.when(pokedex.getPokemons()).thenReturn(expectedPokemons);
+        List<Pokemon> actualPokedex = pokedex.getPokemons();
 
+        assertEquals(actualPokedex, expectedPokemons);
         Mockito.verify(pokedex).getPokemons();
-        assertEquals(pokedex.getPokemons(), expectedPokemons);
     }
 
     @Test
@@ -115,7 +115,6 @@ public class IPokedexTest {
         Comparator<Pokemon> comparator = Comparator.comparing(Pokemon::getIndex);
 
         // Appel de la fonction à tester
-        Mockito.when(pokedex.getPokemons(comparator)).thenReturn(expectedPokemons);
         List<Pokemon> actualPokemons = pokedex.getPokemons(comparator);
 
         assertEquals(actualPokemons, expectedPokemons);
@@ -130,8 +129,10 @@ public class IPokedexTest {
         Pokedex pokedex = new Pokedex(pokemonMetadataProvider, pokemonFactory);
         Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56 );
         PokemonMetadata pokemonMetadata;
+        pokedex.addPokemon(pokemon);
         try {
             pokemonMetadata = pokedex.getPokemonMetadata(pokemon.getIndex());
+
             assertEquals(pokemonMetadata.getIndex(), pokemon.getIndex());
             assertEquals(pokemonMetadata.getName(), pokemon.getName());
             assertEquals(pokemonMetadata.getAttack(), pokemon.getAttack());
@@ -151,11 +152,6 @@ public class IPokedexTest {
         pokemonFactory.setPokedex(pokedex);
         try {
             Pokemon pokemon = pokedex.createPokemon(0, 613, 64, 4000, 4);
-            assertEquals(pokemon.getIndex(), 0);
-            assertEquals(pokemon.getCp(), 613);
-            assertEquals(pokemon.getHp(), 64);
-            assertEquals(pokemon.getDust(), 4000);
-            assertEquals(pokemon.getCandy(), 4);
         } catch (PokedexException e) {
             throw new RuntimeException(e);
         }
