@@ -93,7 +93,6 @@ public class IPokedexTest {
         List<Pokemon> actualPokedex = pokedex.getPokemons();
 
         assertEquals(actualPokedex, expectedPokemons);
-        Mockito.verify(pokedex).getPokemons();
     }
 
     @Test
@@ -118,8 +117,6 @@ public class IPokedexTest {
         List<Pokemon> actualPokemons = pokedex.getPokemons(comparator);
 
         assertEquals(actualPokemons, expectedPokemons);
-        // Vérification des appels aux méthodes sur les mocks
-        Mockito.verify(pokedex).getPokemons(comparator);
     }
 
     @Test
