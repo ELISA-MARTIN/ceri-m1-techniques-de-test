@@ -12,122 +12,43 @@ public class IPokemonFactoryTest {
             Integer.parseInt("not a number");
         });
     }
+
     @Test
     public void testCreatePokemon() throws PokedexException {
         IPokemonFactory pokemonFactory = Mockito.mock(IPokemonFactory.class);
-        Pokemon pokemon = Mockito.mock(Pokemon.class);
-        int index = 1;
-        int cp = 80;
-        int hp = 70;
-        int dust = 500;
-        int candy = 10;
-        //Pokemon pokemon = new Pokemon(index, name, attack, defense, stamina);
+        Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56 );
+        Pokemon actualPokemon = pokemonFactory.createPokemon(0, 613, 64, 4000, 4);
 
-        Mockito.when(pokemonFactory.createPokemon(index, cp, hp, dust, candy)).thenReturn(pokemon);
-
-        Pokemon actualPokemon = pokemonFactory.createPokemon(index, cp, hp, dust, candy);
-
+        assertEquals(actualPokemon, pokemon);
         assertNotNull(actualPokemon);
         assertTrue(actualPokemon instanceof Pokemon); // Vérifie que l'objet retourné est bien un Pokemon
 
-        Mockito.verify(pokemonFactory).createPokemon(index, cp, hp, dust, candy);
+        Mockito.verify(pokemonFactory).createPokemon(0, 613, 64, 4000, 4);
     }
 
-    // Vérifier que index est bien entre 0 et 150
     @Test
     public void testIsBetween0And150() {
-        int index = 200; // le nombre à tester
-
-        /*assertThrows(IllegalArgumentException.class, () -> {
-            if(index < 0 || index > 150) {
-                throw new IllegalArgumentException("L'index doit être compris entre 0 et 150 inclus.");
-            }
-        });*/
-        try {
-            if(index < 0 || index > 150) { // modifier la limite supérieure
-                throw new IllegalArgumentException("L'index doit être compris entre 0 et 150 inclus.");
-            }
-            //fail("L'exception IllegalArgumentException aurait dû être levée");
-        } catch (IllegalArgumentException e) {
-            // L'exception a été levée, le test est réussi
-        }
-    }
-
-
-    /*@Test
-    public void attacksTestIsBetween0And15() {
-        int attacks = 10;
-        assertThrows(IllegalArgumentException.class, () -> {
-            if(attacks < 0 || attacks > 150) {
-                throw new IllegalArgumentException("L'attaque doit être comprise entre 0 et 15 inclus.");
-            }
-        });
-    }*/
-
-    @Test
-    public void attacksTestIsBetween0And15() {
-        int attacks = 10;
-        try {
-            if(attacks < 0 || attacks > 15) { // modifier la limite supérieure
-                throw new IllegalArgumentException("L'attaque doit être comprise entre 0 et 15 inclus.");
-            }
-            //fail("L'exception IllegalArgumentException aurait dû être levée");
-        } catch (IllegalArgumentException e) {
-            // L'exception a été levée, le test est réussi
-        }
+        Pokemon pokemon1 = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56 );
+        assertTrue("L'index est bien compris entre 0 et 150", pokemon1.getIndex() >= 0 && pokemon1.getIndex() <= 150);
     }
 
     @Test
-    public void defenseTestIsBetween0And15() {
-        int defense = 12;
-        /*assertThrows(IllegalArgumentException.class, () -> {
-            if(defense < 0 || defense > 150) {
-                throw new IllegalArgumentException("La défense doit être comprise entre 0 et 15 inclus.");
-            }
-        });*/
-        try {
-            if(defense < 0 || defense > 15) { // modifier la limite supérieure
-                throw new IllegalArgumentException("La défense doit être comprise entre 0 et 15.");
-            }
-            //fail("L'exception IllegalArgumentException aurait dû être levée");
-        } catch (IllegalArgumentException e) {
-            // L'exception a été levée, le test est réussi
-        }
+    public void attacksTestIsBetween0And150() {
+        Pokemon pokemon1 = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56 );
+        assertTrue("L'attaque est bien compris entre 0 et 150", pokemon1.getAttack() >= 0 && pokemon1.getAttack() <= 150);
+
+    }
+
+    @Test
+    public void defenseTestIsBetween0And150() {
+        Pokemon pokemon1 = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56 );
+        assertTrue("La défense est bien compris entre 0 et 150", pokemon1.getDefense() >= 0 && pokemon1.getDefense() <= 150);
     }
 
     @Test
     public void staminaTestIsBetween0And150() {
-        int stamina = 18;
-        /*assertThrows(IllegalArgumentException.class, () -> {
-            if(stamina < 0 || stamina > 150) {
-                throw new IllegalArgumentException("La défense doit être comprise entre 0 et 15 inclus.");
-            }
-        });*/
-        try {
-            if(stamina < 0 || stamina > 150) { // modifier la limite supérieure
-                throw new IllegalArgumentException("Stamina doit être compris entre 0 et 150 inclus.");
-            }
-            //fail("L'exception IllegalArgumentException aurait dû être levée");
-        } catch (IllegalArgumentException e) {
-            // L'exception a été levée, le test est réussi
-        }
-    }
+        Pokemon pokemon1 = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56 );
+        assertTrue("Stamina est bien compris entre 0 et 150", pokemon1.getStamina() >= 0 && pokemon1.getStamina() <= 150);
 
-    @Test
-    public void perfectionTestIsBetween0And15() {
-        final double iv = 18;
-        /*assertThrows(IllegalArgumentException.class, () -> {
-            if(iv < 0 || iv > 100) {
-                throw new IllegalArgumentException("La perfection doit être comprise entre 0 et 100 %.");
-            }
-        });*/
-        try {
-            if(iv < 0 || iv > 100) { // modifier la limite supérieure
-                throw new IllegalArgumentException("La perfection doit être comprise entre 0 et 100 %.");
-            }
-            //fail("L'exception IllegalArgumentException aurait dû être levée");
-        } catch (IllegalArgumentException e) {
-            // L'exception a été levée, le test est réussi
-        }
     }
 }
