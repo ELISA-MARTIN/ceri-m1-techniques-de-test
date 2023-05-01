@@ -147,7 +147,6 @@ public class IPokedexTest {
         pokemonFactory.setPokedex(pokedex);
         try {
             Pokemon pokemon = pokedex.createPokemon(0, 613, 64, 4000, 4);
-            assertTrue(pokemon instanceof Pokemon);
             assertEquals(pokemon.getIndex(), 0);
         } catch (PokedexException e) {
             throw new RuntimeException(e);
