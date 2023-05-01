@@ -18,7 +18,7 @@ public class IPokemonFactoryTest {
         pokemonFactory.setPokedex(pokedex);
 
         assertEquals(actualPokemon, pokemon);
-        assertNotNull(actualPokemon);
+        //assertNotNull(actualPokemon);
         assertTrue(actualPokemon instanceof Pokemon); // Vérifie que l'objet retourné est bien un Pokemon
 
         Mockito.verify(pokemonFactory).createPokemon(0, 613, 64, 4000, 4);
