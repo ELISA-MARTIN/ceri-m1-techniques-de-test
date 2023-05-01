@@ -6,12 +6,6 @@ import org.mockito.Mockito;
 import static org.junit.Assert.*;
 
 public class IPokemonFactoryTest {
-    @Test
-    public void parseIntThrowsExceptionWhenNotANumber() throws Exception {
-        assertThrows(NumberFormatException.class, () -> {
-            Integer.parseInt("not a number");
-        });
-    }
 
     @Test
     public void testCreatePokemon() throws PokedexException {
@@ -21,6 +15,7 @@ public class IPokemonFactoryTest {
         Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56 );
         pokedex.addPokemon(pokemon);
         Pokemon actualPokemon = pokemonFactory.createPokemon(0, 613, 64, 4000, 4);
+        pokemonFactory.setPokedex(pokedex);
 
         assertEquals(actualPokemon, pokemon);
         assertNotNull(actualPokemon);
