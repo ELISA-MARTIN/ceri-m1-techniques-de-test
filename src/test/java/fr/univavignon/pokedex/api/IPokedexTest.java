@@ -124,11 +124,11 @@ public class IPokedexTest {
         Pokedex pokedex = new Pokedex(pokemonMetadataProvider, pokemonFactory);
         Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56 );
         PokemonMetadata pokemonMetadata;
+        pokedex.addPokemon(pokemon);
         pokemonMetadata = pokedex.getPokemonMetadata(pokemon.getIndex());
         if(pokemonMetadata == null) {
             throw new PokedexException("Impossible de créer le Pokemon pour l'index " + pokemon.getIndex() + ". Les métadonnées sont manquantes.");
         }
-        pokedex.addPokemon(pokemon);
         assertEquals(pokemonMetadata.getIndex(), pokemon.getIndex());
         assertEquals(pokemonMetadata.getName(), pokemon.getName());
         assertEquals(pokemonMetadata.getAttack(), pokemon.getAttack());
