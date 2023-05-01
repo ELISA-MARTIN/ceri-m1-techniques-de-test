@@ -54,5 +54,6 @@ public interface IPokedex extends IPokemonMetadataProvider, IPokemonFactory {
 
 	PokemonMetadata getPokemonMetadata(int index) throws PokedexException;
 	Pokemon createPokemon(int index, int cp, int hp, int dust, int candy) throws PokedexException;
+	void setPokedex(IPokedex pokedex);
 	
 }
