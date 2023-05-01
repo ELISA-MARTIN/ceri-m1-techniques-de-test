@@ -118,25 +118,22 @@ public class IPokedexTest {
     }
 
     @Test
-    public void testGetPokemonMetadata(){
+    public void testGetPokemonMetadata() throws PokedexException {
         IPokemonMetadataProvider pokemonMetadataProvider = Mockito.mock(PokemonMetadataProvider.class);
         IPokemonFactory pokemonFactory = Mockito.mock(PokemonFactory.class);
         Pokedex pokedex = new Pokedex(pokemonMetadataProvider, pokemonFactory);
         Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56 );
         PokemonMetadata pokemonMetadata;
         pokedex.addPokemon(pokemon);
-        try {
-            pokemonMetadata = pokedex.getPokemonMetadata(pokemon.getIndex());
-
-            assertEquals(pokemonMetadata.getIndex(), pokemon.getIndex());
-            assertEquals(pokemonMetadata.getName(), pokemon.getName());
-            assertEquals(pokemonMetadata.getAttack(), pokemon.getAttack());
-            assertEquals(pokemonMetadata.getStamina(), pokemon.getStamina());
-            assertEquals(pokemonMetadata.getDefense(), pokemon.getDefense());
+        pokemonMetadata = pokedex.getPokemonMetadata(pokemon.getIndex());
+        if(pokemonMetadata == null) {
+            throw new PokedexException("Impossible de créer le Pokemon pour l'index " + pokemon.getIndex() + ". Les métadonnées sont manquantes.");
         }
-        catch  (PokedexException e) {
-            fail("L'exception ne devrait pas être lancée" + e.getMessage());
-        }
+        assertEquals(pokemonMetadata.getIndex(), pokemon.getIndex());
+        assertEquals(pokemonMetadata.getName(), pokemon.getName());
+        assertEquals(pokemonMetadata.getAttack(), pokemon.getAttack());
+        assertEquals(pokemonMetadata.getStamina(), pokemon.getStamina());
+        assertEquals(pokemonMetadata.getDefense(), pokemon.getDefense());
     }
 
     @Test
@@ -147,6 +144,7 @@ public class IPokedexTest {
         pokemonFactory.setPokedex(pokedex);
         try {
             Pokemon pokemon = pokedex.createPokemon(0, 613, 64, 4000, 4);
+            fail("Pas d'exception");
         } catch (PokedexException e) {
             throw new RuntimeException(e);
         }
