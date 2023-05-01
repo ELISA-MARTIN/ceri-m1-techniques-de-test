@@ -16,7 +16,10 @@ public class IPokemonFactoryTest {
     @Test
     public void testCreatePokemon() throws PokedexException {
         IPokemonFactory pokemonFactory = Mockito.mock(IPokemonFactory.class);
+        IPokemonMetadataProvider pokemonMetadataProvider = Mockito.mock(PokemonMetadataProvider.class);
+        Pokedex pokedex = new Pokedex(pokemonMetadataProvider, pokemonFactory);
         Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56 );
+        pokedex.addPokemon(pokemon);
         Pokemon actualPokemon = pokemonFactory.createPokemon(0, 613, 64, 4000, 4);
 
         assertEquals(actualPokemon, pokemon);
