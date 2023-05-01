@@ -20,7 +20,8 @@ public class IPokedexTest {
         assertEquals(pokedex.size(), 0);
     }
 
-    @Test void testAddPokemon() throws PokedexException {
+    @Test
+    public void testAddPokemon() throws PokedexException {
         IPokemonMetadataProvider pokemonMetadataProvider = Mockito.mock(IPokemonMetadataProvider.class);
         IPokemonFactory pokemonFactory = Mockito.mock(IPokemonFactory.class);
 
