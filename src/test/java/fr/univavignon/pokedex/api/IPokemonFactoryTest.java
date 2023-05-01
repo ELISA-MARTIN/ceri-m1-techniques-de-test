@@ -30,6 +30,15 @@ public class IPokemonFactoryTest {
         assertTrue("L'index est bien compris entre 0 et 150", pokemon1.getIndex() >= 0 && pokemon1.getIndex() <= 150);
     }
 
+    @Test
+    public void testSetPokedex() {
+        IPokedex pokedex = Mockito.mock(IPokedex.class);
+        PokemonFactory pokemonFactory = new PokemonFactory();
+        assertNull(pokemonFactory.pokedex);
+        pokemonFactory.setPokedex(pokedex);
+        assertEquals(pokedex, pokemonFactory.pokedex);
+    }
+
     /*@Test
     public void attacksTestIsBetween0And150() {
         Pokemon pokemon1 = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56 );

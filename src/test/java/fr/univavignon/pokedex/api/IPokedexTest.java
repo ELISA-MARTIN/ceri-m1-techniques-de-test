@@ -154,6 +154,18 @@ public class IPokedexTest {
         }
     }
 
+    @Test
+    public void testSetPokedex() {
+        IPokemonMetadataProvider pokemonMetadataProvider = Mockito.mock(PokemonMetadataProvider.class);
+        IPokemonFactory pokemonFactory = Mockito.mock(PokemonFactory.class);
+        Pokedex pokedex = new Pokedex(pokemonMetadataProvider, pokemonFactory);
+
+        IPokedex iPokedex = Mockito.mock(Pokedex.class);
+        pokemonFactory.setPokedex(pokedex);
+        assertEquals(pokedex, ((PokemonFactory) pokemonFactory).pokedex);
+    }
+
+
     // Tester que la fonction getPokemon lève bien une exception quand on met un indice de pokemon inexistant
     /*@Test
     public void testGetPokemonException() throws PokedexException {
