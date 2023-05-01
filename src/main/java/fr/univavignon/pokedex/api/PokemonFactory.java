@@ -2,7 +2,10 @@ package fr.univavignon.pokedex.api;
 
 public class PokemonFactory implements IPokemonFactory {
 
-    Pokedex pokedex;
+    IPokedex pokedex;
+    public void setPokedex(IPokedex pokedex) {
+        this.pokedex = pokedex;
+    }
 
     @Override
     public Pokemon createPokemon(int index, int cp, int hp, int dust, int candy) throws PokedexException {

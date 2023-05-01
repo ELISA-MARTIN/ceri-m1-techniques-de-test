@@ -38,7 +38,7 @@ public class IPokedexTest {
         assertEquals(pokemon1.getDefense(), 126);
         assertEquals(pokemon1.getStamina(), 90);
         assertEquals(pokemon1.getCp(), 613);
-        assertEquals(pokemon1.getAttack(), 64);
+        assertEquals(pokemon1.getHp(), 64);
         assertEquals(pokemon1.getDust(), 4000);
         assertEquals(pokemon1.getCandy(), 4);
         //assertEquals(pokemon1.getIv(), 56);
@@ -116,10 +116,11 @@ public class IPokedexTest {
 
         // Appel de la fonction à tester
         Mockito.when(pokedex.getPokemons(comparator)).thenReturn(expectedPokemons);
+        List<Pokemon> actualPokemons = pokedex.getPokemons(comparator);
 
-        assertEquals(pokedex.getPokemons(comparator), expectedPokemons);
+        assertEquals(actualPokemons, expectedPokemons);
         // Vérification des appels aux méthodes sur les mocks
-        Mockito.verify(pokedex, Mockito.times(1)).getPokemons(comparator);
+        Mockito.verify(pokedex.getPokemons(comparator));
     }
 
     @Test
@@ -147,6 +148,7 @@ public class IPokedexTest {
         IPokemonMetadataProvider pokemonMetadataProvider = Mockito.mock(PokemonMetadataProvider.class);
         IPokemonFactory pokemonFactory = Mockito.mock(PokemonFactory.class);
         Pokedex pokedex = new Pokedex(pokemonMetadataProvider, pokemonFactory);
+        pokemonFactory.setPokedex(pokedex);
         try {
             Pokemon pokemon = pokedex.createPokemon(0, 613, 64, 4000, 4);
             assertEquals(pokemon.getIndex(), 0);

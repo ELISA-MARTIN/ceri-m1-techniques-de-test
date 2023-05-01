@@ -42,10 +42,20 @@ public class Pokedex implements IPokedex, IPokemonMetadataProvider {
         return pokemon.getIndex();
     }
 
-    @Override
+    /*@Override
     public List<Pokemon> getPokemons() {
         return pokemons;
+    }*/
+
+    @Override
+    public List<Pokemon> getPokemons() {
+        List<Pokemon> copy = new ArrayList<>(pokemons.size());
+        for (Pokemon p : pokemons) {
+            copy.add(p);
+        }
+        return copy;
     }
+
     @Override
     public List<Pokemon> getPokemons(Comparator<Pokemon> comparator) {
         List<Pokemon> sortedPokemons = new ArrayList<>(this.pokemons);
@@ -55,6 +65,9 @@ public class Pokedex implements IPokedex, IPokemonMetadataProvider {
 
     @Override
     public PokemonMetadata getPokemonMetadata(int index) throws PokedexException {
+        if (index < 0 || index > 150) {
+            throw new PokedexException("Index doit être compris entre 0 et 150 or le votre est :" + index);
+        }
         Pokemon pokemon = getPokemon(index);
         PokemonMetadata pokemonMetadata = new PokemonMetadata(index, pokemon.getName(), pokemon.getAttack(),
                 pokemon.getDefense(), pokemon.getStamina());
