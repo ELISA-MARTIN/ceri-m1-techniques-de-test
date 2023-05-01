@@ -67,7 +67,7 @@ public class IPokedexTest {
 
         try {
             Pokemon pokemon = pokedex.getPokemon(133);
-            assertTrue("Le bon pokemon est retourné", pokemon == pokemon2);
+            assertEquals(pokemon, pokemon2);
         }
         catch  (PokedexException e) {
             throw new RuntimeException(e);
@@ -120,7 +120,7 @@ public class IPokedexTest {
 
         assertEquals(actualPokemons, expectedPokemons);
         // Vérification des appels aux méthodes sur les mocks
-        Mockito.verify(pokedex.getPokemons(comparator));
+        Mockito.verify(pokedex).getPokemons(comparator);
     }
 
     @Test

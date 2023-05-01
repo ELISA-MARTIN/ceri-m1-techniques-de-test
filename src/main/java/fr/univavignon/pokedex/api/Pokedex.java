@@ -73,15 +73,18 @@ public class Pokedex implements IPokedex, IPokemonMetadataProvider {
         if (index < 0 || index > 150) {
             throw new PokedexException("Index doit être compris entre 0 et 150 or le votre est :" + index);
         }
-        Pokemon pokemon = getPokemon(index);
-        PokemonMetadata pokemonMetadata = new PokemonMetadata(index, pokemon.getName(), pokemon.getAttack(),
-                pokemon.getDefense(), pokemon.getStamina());
-        return pokemonMetadata;
+        try {
+            Pokemon pokemon = getPokemon(index);
+            PokemonMetadata pokemonMetadata = new PokemonMetadata(index, pokemon.getName(), pokemon.getAttack(),
+                    pokemon.getDefense(), pokemon.getStamina());
+            return pokemonMetadata;
+        } catch (PokedexException e) {
+            throw new PokedexException("Pokemon inexistant : " + e.getMessage());
+        }
     }
 
     @Override
     public Pokemon createPokemon(int index, int cp, int hp, int dust, int candy) throws PokedexException {
-        PokemonFactory pokemonFactory = new PokemonFactory();
         Pokemon pokemon = pokemonFactory.createPokemon(index, cp, hp, dust, candy);
         return pokemon;
     }
