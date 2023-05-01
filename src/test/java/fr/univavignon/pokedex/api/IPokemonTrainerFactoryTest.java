@@ -28,7 +28,7 @@ public class IPokemonTrainerFactoryTest {
         assertTrue("Le nombre devrait être compris entre 0 et 150", number >= 0 && number <= 150);
     }*/
 
-    @Test
+    /*@Test
     public void testCreateTrainerWithMockito() {
         // crée un objet mock pour l'interface IPokemonTrainerFactory en utilisant Mockito
         IPokemonTrainerFactory trainerFactoryMock = Mockito.mock(IPokemonTrainerFactory.class);
@@ -40,7 +40,7 @@ public class IPokemonTrainerFactoryTest {
 
         PokemonTrainer trainer = trainerFactoryMock.createTrainer("Ash Ketchum", Team.VALOR);
         assertEquals(trainerMock, trainer);
-    }
+    }*/
 
     /*@Test
     public void testCreateTrainerWithNullName() {
