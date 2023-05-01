@@ -13,110 +13,148 @@ import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 public class IPokedexTest {
-
-    // test pour la fonction int size()
     @Test
     public void testPokedexSize() {
-        // Création d'un mock de IPokedex
         IPokedex pokedex = Mockito.mock(IPokedex.class);
+        Mockito.when(pokedex.size()).thenReturn(0);
+        assertEquals(pokedex.size(), 0);
+    }
 
-        // Configuration du mock pour qu'il renvoie un nombre de Pokemons supérieur à zéro
-        Mockito.when(pokedex.size()).thenReturn(-1);
+    @Test void testAddPokemon() throws PokedexException {
+        IPokemonMetadataProvider pokemonMetadataProvider = Mockito.mock(IPokemonMetadataProvider.class);
+        IPokemonFactory pokemonFactory = Mockito.mock(IPokemonFactory.class);
 
-        // Vérification que la méthode size() retourne un entier supérieur à zéro
-        if(pokedex.size() >= 0) {
-            throw new IllegalArgumentException("Le nombre de pokemon dans pokedex est forcement > 0");
-        }
+        Pokedex pokedex = new Pokedex(pokemonMetadataProvider, pokemonFactory);
+        Pokemon pokemon1 = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56 );
+        Pokemon pokemon2 = new Pokemon(133, "Aquali", 186, 168, 260, 2729, 202, 5000, 4, 100);
+
+        pokedex.addPokemon(pokemon1);
+        pokedex.addPokemon(pokemon2);
+
+        assertEquals(pokemon1.getIndex(), 0);
+        assertEquals(pokemon1.getName(), "Bulbizarre");
+        assertEquals(pokemon1.getAttack(), 126);
+        assertEquals(pokemon1.getDefense(), 126);
+        assertEquals(pokemon1.getStamina(), 90);
+        assertEquals(pokemon1.getCp(), 613);
+        assertEquals(pokemon1.getAttack(), 64);
+        assertEquals(pokemon1.getDust(), 4000);
+        assertEquals(pokemon1.getCandy(), 4);
+        //assertEquals(pokemon1.getIv(), 56);
+        assertEquals(pokedex.size(), 2);
+
+
     }
 
     @Test
     public void testIsBetween0And150() {
-        int index = 100; // le nombre à tester
-        assertTrue("L'index devrait être compris entre 0 et 150", index >= 0 && index <= 150);
+        Pokemon pokemon1 = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56 );
+        //Pokemon pokemon2 = new Pokemon(155, "Bulb", 126, 126, 90, 613, 64, 4000, 4, 56 );
+
+        assertTrue("L'index devrait être compris entre 0 et 150", pokemon1.getIndex() < 0 || pokemon1.getIndex() > 150);
+        //assertTrue("L'index devrait être compris entre 0 et 150", pokemon2.getIndex() < 0 || pokemon2.getIndex() > 150);
+    }
+
+    @Test
+    public void testGetPokemon() {
+        IPokemonMetadataProvider pokemonMetadataProvider = Mockito.mock(IPokemonMetadataProvider.class);
+        IPokemonFactory pokemonFactory = Mockito.mock(IPokemonFactory.class);
+        Pokedex pokedex = new Pokedex(pokemonMetadataProvider, pokemonFactory);
+
+        Pokemon pokemon1 = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56 );
+        Pokemon pokemon2 = new Pokemon(133, "Aquali", 186, 168, 260, 2729, 202, 5000, 4, 100);
+        pokedex.addPokemon(pokemon1);
+        pokedex.addPokemon(pokemon2);
+
+        try {
+            Pokemon pokemon = pokedex.getPokemon(133);
+            assertTrue("Le bon pokemon est retourné", pokemon == pokemon2);
+        }
+        catch  (PokedexException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     // Vérifier qu'on retourne bien une liste
     @Test
     public void testGetPokemons() {
-        IPokedex pokedex = Mockito.mock(IPokedex.class);
-        Pokemon pokemon1 = Mockito.mock(Pokemon.class);
-        Pokemon pokemon2 = Mockito.mock(Pokemon.class);
+        IPokemonMetadataProvider pokemonMetadataProvider = Mockito.mock(IPokemonMetadataProvider.class);
+        IPokemonFactory pokemonFactory = Mockito.mock(IPokemonFactory.class);
+        Pokedex pokedex = new Pokedex(pokemonMetadataProvider, pokemonFactory);
+
+        Pokemon pokemon1 = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56 );
+        Pokemon pokemon2 = new Pokemon(133, "Aquali", 186, 168, 260, 2729, 202, 5000, 4, 100);
+        pokedex.addPokemon(pokemon1);
+        pokedex.addPokemon(pokemon2);
+
         List<Pokemon> expectedPokemons = new ArrayList<>();
         expectedPokemons.add(pokemon1);
         expectedPokemons.add(pokemon2);
 
         Mockito.when(pokedex.getPokemons()).thenReturn(expectedPokemons);
 
-        List<Pokemon> actualPokemons = pokedex.getPokemons();
-
         Mockito.verify(pokedex).getPokemons();
-
-        assertEquals(expectedPokemons, actualPokemons);
+        assertEquals(pokedex, expectedPokemons);
     }
 
     @Test
     public void testGetPokemonsComparator() {
-        IPokedex pokedex = Mockito.mock(IPokedex.class);
-        Pokemon pokemon1 = Mockito.mock(Pokemon.class);
-        Pokemon pokemon2 = Mockito.mock(Pokemon.class);
-        Pokemon pokemon3 = Mockito.mock(Pokemon.class);
+        IPokemonMetadataProvider pokemonMetadataProvider = Mockito.mock(IPokemonMetadataProvider.class);
+        IPokemonFactory pokemonFactory = Mockito.mock(IPokemonFactory.class);
+        Pokedex pokedex = new Pokedex(pokemonMetadataProvider, pokemonFactory);
+
+        Pokemon pokemon1 = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56 );
+        Pokemon pokemon2 = new Pokemon(133, "Aquali", 186, 168, 260, 2729, 202, 5000, 4, 100);
+        pokedex.addPokemon(pokemon2);
+        pokedex.addPokemon(pokemon1);
 
         List<Pokemon> expectedPokemons = new ArrayList<>();
         expectedPokemons.add(pokemon1);
         expectedPokemons.add(pokemon2);
-        expectedPokemons.add(pokemon3);
-        Mockito.when(pokedex.size()).thenReturn(3);
 
         // Définition du comparateur
         Comparator<Pokemon> comparator = Comparator.comparing(Pokemon::getIndex);
 
         // Appel de la fonction à tester
         Mockito.when(pokedex.getPokemons(comparator)).thenReturn(expectedPokemons);
-        List<Pokemon> pokemons = pokedex.getPokemons(comparator);
 
-        // Vérification du résultat
-        assertNotNull(pokemons);
-        assertEquals(3, pokedex.size());
-        assertEquals(pokemon1, pokemons.get(0));
-        assertEquals(pokemon2, pokemons.get(1));
-        assertEquals(pokemon3, pokemons.get(2));
-
+        assertEquals(pokedex.getPokemons(comparator), expectedPokemons);
         // Vérification des appels aux méthodes sur les mocks
         Mockito.verify(pokedex, Mockito.times(1)).getPokemons(comparator);
-        Mockito.verify(pokedex, Mockito.times(1)).size();
     }
 
-    // Vérifier que le pokemon a bien été ajouté
-    /*@Test
-    public void testAddPokemon() {
-        IPokedex pokedex = Mockito.mock(IPokedex.class);
-        Pokemon pokemon = Mockito.mock(Pokemon.class);
+    @Test
+    public void testGetPokemonMetadata(){
+        IPokemonMetadataProvider pokemonMetadataProvider = Mockito.mock(IPokemonMetadataProvider.class);
+        IPokemonFactory pokemonFactory = Mockito.mock(IPokemonFactory.class);
+        Pokedex pokedex = new Pokedex(pokemonMetadataProvider, pokemonFactory);
+        Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56 );
+        PokemonMetadata pokemonMetadata;
+        try {
+            pokemonMetadata = pokedex.getPokemonMetadata(pokemon.getIndex());
+            assertEquals(pokemonMetadata.getIndex(), pokemon.getIndex());
+            assertEquals(pokemonMetadata.getName(), pokemon.getName());
+            assertEquals(pokemonMetadata.getAttack(), pokemon.getAttack());
+            assertEquals(pokemonMetadata.getStamina(), pokemon.getStamina());
+            assertEquals(pokemonMetadata.getDefense(), pokemon.getDefense());
+        }
+        catch  (PokedexException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-        // Configuration du mock pour que getPokemons renvoie une liste vide
-        Mockito.when(pokedex.getPokemons()).thenReturn(new ArrayList<>());
-        assertEquals(0, pokedex.getPokemons().size());
-
-        Mockito.when(pokedex.addPokemon(pokemon)).thenReturn();
-        int id = pokedex.addPokemon(pokemon);
-        assertEquals(1, id);
-        assertEquals(1, pokedex.getPokemons().size());
-    }*/
-
-    /*@Test
-    public void testAddPokemon() {
-        IPokedex pokedex = Mockito.mock(IPokedex.class);
-        Pokemon pokemon = Mockito.mock(Pokemon.class);
-
-        Mockito.when(pokedex.getPokemons()).thenReturn(new ArrayList<>());
-
-        // Définir la réponse par défaut pour la méthode getPokemons
-        List<Pokemon> pokemonList = new ArrayList<Pokemon>();
-        pokemonList.add(pokemon);
-        Mockito.when(pokedex.getPokemons()).thenReturn(pokemonList);
-
-        List<Pokemon> pokemons = pokedex.getPokemons();
-        assertTrue(pokemons.contains(pokemon));
-    }*/
+    @Test
+    public void testCreatePokemon(){
+        IPokemonMetadataProvider pokemonMetadataProvider = Mockito.mock(IPokemonMetadataProvider.class);
+        IPokemonFactory pokemonFactory = Mockito.mock(IPokemonFactory.class);
+        Pokedex pokedex = new Pokedex(pokemonMetadataProvider, pokemonFactory);
+        try {
+            pokedex.createPokemon(0, 613, 64, 4000, 4);
+            fail("L'exception ne s'est pas lancée");
+        } catch (PokedexException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     // Tester que la fonction getPokemon lève bien une exception quand on met un indice de pokemon inexistant
     /*@Test

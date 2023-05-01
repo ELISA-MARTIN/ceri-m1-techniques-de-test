@@ -10,8 +10,8 @@ public class Pokedex implements IPokedex, IPokemonMetadataProvider {
     private PokemonMetadataProvider pokemonMetadataProvider;
     private PokemonFactory pokemonFactory;
 
-    public Pokedex(final IPokemonMetadataProvider iPokemonMetadataProvider,
-                   final IPokemonFactory iPokemonFactory) {
+    public Pokedex(IPokemonMetadataProvider iPokemonMetadataProvider,
+                   IPokemonFactory iPokemonFactory) {
         pokemons = new ArrayList<>();
         this.pokemonMetadataProvider = (PokemonMetadataProvider) iPokemonMetadataProvider;
         this.pokemonFactory = (PokemonFactory) iPokemonFactory;
@@ -33,6 +33,15 @@ public class Pokedex implements IPokedex, IPokemonMetadataProvider {
 
     @Override
     public int addPokemon(Pokemon pokemon) {
+        for (int i = 0; i < pokemons.size(); i++) {
+            if (pokemon.getIndex() == pokemons.get(i).getIndex()) {
+                return -1;
+            }
+            else{
+                this.pokemons.add(pokemon);
+                return pokemon.getIndex();
+            }
+        }
         this.pokemons.add(pokemon);
         return pokemon.getIndex();
     }
