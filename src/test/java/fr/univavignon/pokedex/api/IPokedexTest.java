@@ -15,15 +15,15 @@ import static org.junit.Assert.assertEquals;
 public class IPokedexTest {
     @Test
     public void testPokedexSize() {
-        IPokedex pokedex = Mockito.mock(IPokedex.class);
+        IPokedex pokedex = Mockito.mock(Pokedex.class);
         Mockito.when(pokedex.size()).thenReturn(0);
         assertEquals(pokedex.size(), 0);
     }
 
     @Test
     public void testAddPokemon() throws PokedexException {
-        IPokemonMetadataProvider pokemonMetadataProvider = Mockito.mock(IPokemonMetadataProvider.class);
-        IPokemonFactory pokemonFactory = Mockito.mock(IPokemonFactory.class);
+        IPokemonMetadataProvider pokemonMetadataProvider = Mockito.mock(PokemonMetadataProvider.class);
+        IPokemonFactory pokemonFactory = Mockito.mock(PokemonFactory.class);
 
         Pokedex pokedex = new Pokedex(pokemonMetadataProvider, pokemonFactory);
         Pokemon pokemon1 = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56 );
@@ -58,8 +58,8 @@ public class IPokedexTest {
 
     @Test
     public void testGetPokemon() {
-        IPokemonMetadataProvider pokemonMetadataProvider = Mockito.mock(IPokemonMetadataProvider.class);
-        IPokemonFactory pokemonFactory = Mockito.mock(IPokemonFactory.class);
+        IPokemonMetadataProvider pokemonMetadataProvider = Mockito.mock(PokemonMetadataProvider.class);
+        IPokemonFactory pokemonFactory = Mockito.mock(PokemonFactory.class);
         Pokedex pokedex = new Pokedex(pokemonMetadataProvider, pokemonFactory);
 
         Pokemon pokemon1 = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56 );
@@ -79,8 +79,8 @@ public class IPokedexTest {
     // Vérifier qu'on retourne bien une liste
     @Test
     public void testGetPokemons() {
-        IPokemonMetadataProvider pokemonMetadataProvider = Mockito.mock(IPokemonMetadataProvider.class);
-        IPokemonFactory pokemonFactory = Mockito.mock(IPokemonFactory.class);
+        IPokemonMetadataProvider pokemonMetadataProvider = Mockito.mock(PokemonMetadataProvider.class);
+        IPokemonFactory pokemonFactory = Mockito.mock(PokemonFactory.class);
         Pokedex pokedex = new Pokedex(pokemonMetadataProvider, pokemonFactory);
 
         Pokemon pokemon1 = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56 );
@@ -100,8 +100,8 @@ public class IPokedexTest {
 
     @Test
     public void testGetPokemonsComparator() {
-        IPokemonMetadataProvider pokemonMetadataProvider = Mockito.mock(IPokemonMetadataProvider.class);
-        IPokemonFactory pokemonFactory = Mockito.mock(IPokemonFactory.class);
+        IPokemonMetadataProvider pokemonMetadataProvider = Mockito.mock(PokemonMetadataProvider.class);
+        IPokemonFactory pokemonFactory = Mockito.mock(PokemonFactory.class);
         Pokedex pokedex = new Pokedex(pokemonMetadataProvider, pokemonFactory);
 
         Pokemon pokemon1 = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56 );
@@ -126,8 +126,8 @@ public class IPokedexTest {
 
     @Test
     public void testGetPokemonMetadata(){
-        IPokemonMetadataProvider pokemonMetadataProvider = Mockito.mock(IPokemonMetadataProvider.class);
-        IPokemonFactory pokemonFactory = Mockito.mock(IPokemonFactory.class);
+        IPokemonMetadataProvider pokemonMetadataProvider = Mockito.mock(PokemonMetadataProvider.class);
+        IPokemonFactory pokemonFactory = Mockito.mock(PokemonFactory.class);
         Pokedex pokedex = new Pokedex(pokemonMetadataProvider, pokemonFactory);
         Pokemon pokemon = new Pokemon(0, "Bulbizarre", 126, 126, 90, 613, 64, 4000, 4, 56 );
         PokemonMetadata pokemonMetadata;
@@ -146,8 +146,8 @@ public class IPokedexTest {
 
     @Test
     public void testCreatePokemon(){
-        IPokemonMetadataProvider pokemonMetadataProvider = Mockito.mock(IPokemonMetadataProvider.class);
-        IPokemonFactory pokemonFactory = Mockito.mock(IPokemonFactory.class);
+        IPokemonMetadataProvider pokemonMetadataProvider = Mockito.mock(PokemonMetadataProvider.class);
+        IPokemonFactory pokemonFactory = Mockito.mock(PokemonFactory.class);
         Pokedex pokedex = new Pokedex(pokemonMetadataProvider, pokemonFactory);
         try {
             pokedex.createPokemon(0, 613, 64, 4000, 4);
