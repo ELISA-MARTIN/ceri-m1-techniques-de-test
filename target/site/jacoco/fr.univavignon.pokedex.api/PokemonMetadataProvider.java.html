@@ -2,21 +2,41 @@
 
 import java.util.List;
 
-<span class="fc" id="L5">public class PokemonMetadataProvider implements IPokemonMetadataProvider{</span>
+/**
+ *
+ * PokemonMetadataProvider class implementing IPokemonMetadataProvider interface.
+ *
+ * @author MARTIN Elisa
+ *
+ */
 
+<span class="fc" id="L13">public class PokemonMetadataProvider implements IPokemonMetadataProvider{</span>
+
+    /** Pokedex. **/
     private Pokedex pokedex;
+
+    /** List of PokemonMetadata. **/
     private List&lt;PokemonMetadata&gt; pokemonMetadataList;
+
+    /**
+     * Retrieves and returns the metadata for the pokemon
+     * denoted by the given &lt;tt&gt;index&lt;/tt&gt;.
+     *
+     * @param index Index of the pokemon to retrieve metadata for.
+     * @return Metadata of the pokemon.
+     * @throws PokedexException If the given &lt;tt&gt;index&lt;/tt&gt; is not valid.
+     */
     @Override
     public PokemonMetadata getPokemonMetadata(int index) throws PokedexException {
-<span class="nc bnc" id="L11" title="All 2 branches missed.">        for (int i = 0; i &lt; pokemonMetadataList.size(); i++) {</span>
-<span class="nc bnc" id="L12" title="All 2 branches missed.">            if (index == pokemonMetadataList.get(i).getIndex()) {</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">        for (int i = 0; i &lt; pokemonMetadataList.size(); i++) {</span>
+<span class="nc bnc" id="L32" title="All 2 branches missed.">            if (index == pokemonMetadataList.get(i).getIndex()) {</span>
                 //PokemonMetadata pokemonMetadata = pokemonMetadataList.get(index);
                 //Pokemon pokemon = pokedex.getPokemon(index);
-<span class="nc" id="L15">                PokemonMetadata pokemonMetadata = new PokemonMetadata(index, pokemonMetadataList.get(i).getName(), pokemonMetadataList.get(i).getAttack(), pokemonMetadataList.get(i).getDefense(), pokemonMetadataList.get(i).getStamina());</span>
-<span class="nc" id="L16">                return pokemonMetadata;</span>
+<span class="nc" id="L35">                PokemonMetadata pokemonMetadata = new PokemonMetadata(index, pokemonMetadataList.get(i).getName(), pokemonMetadataList.get(i).getAttack(), pokemonMetadataList.get(i).getDefense(), pokemonMetadataList.get(i).getStamina());</span>
+<span class="nc" id="L36">                return pokemonMetadata;</span>
             }
         }
-<span class="nc" id="L19">        throw new PokedexException(&quot;Invalid index: &quot; + index);</span>
+<span class="nc" id="L39">        throw new PokedexException(&quot;Invalid index: &quot; + index);</span>
     }
 }
 
