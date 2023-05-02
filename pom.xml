@@ -56,6 +56,12 @@
       <artifactId>badger</artifactId>
       <version>1.0.0</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-javadoc-plugin</artifactId>
+      <version>3.2.0</version>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -95,7 +101,6 @@
         </executions>
       </plugin>
 
-
       <plugin>
         <groupId>com.github.bordertech.buildtools</groupId>
         <artifactId>badger</artifactId>
@@ -114,6 +119,18 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.2.0</version>
+        <configuration>
+          <source>8</source>
+          <detectJavaApiLink>false</detectJavaApiLink>
+          <show>private</show>
+          <nohelp>true</nohelp>
+        </configuration>
       </plugin>
 
     </plugins>
