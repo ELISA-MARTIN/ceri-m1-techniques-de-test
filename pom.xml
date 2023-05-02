@@ -12,6 +12,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
+    <badges.skip>false</badges.skip>
   </properties>
 
   <reporting>
@@ -51,6 +52,12 @@
       <artifactId>checkstyle</artifactId>
       <version>10.10.0</version>
     </dependency>
+    <dependency>
+      <groupId>com.github.bordertech.buildtools</groupId>
+      <artifactId>badger</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+
 
     <!-- <dependency>
       <groupId>javax.servlet</groupId>
@@ -91,6 +98,28 @@
           </execution>
         </executions>
       </plugin>
+
+      <plugin>
+        <groupId>com.github.bordertech.buildtools</groupId>
+        <artifactId>badger</artifactId>
+        <version>1.0.0</version>
+        <executions>
+          <execution>
+            <phase>post-site</phase>
+            <goals>
+              <goal>badges</goal>
+            </goals>
+            <configuration>
+              <skip>${badges.skip}</skip>
+              <outputDir>target/site/badges</outputDir>
+              <inputFiles>
+                <inputFile>target/checkstyle-result.xml</inputFile>
+              </inputFiles>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
     </plugins>
   </build>
 
