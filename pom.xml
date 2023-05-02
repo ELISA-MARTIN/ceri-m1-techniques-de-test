@@ -21,9 +21,13 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
         <version>3.2.2</version>
-        <configuration>
-          <configLocation>checkstyle.xml</configLocation>
-        </configuration>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>checkstyle</report>
+            </reports>
+          </reportSet>
+        </reportSets>
       </plugin>
     </plugins>
   </reporting>
@@ -43,11 +47,6 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-checkstyle-plugin</artifactId>
-      <version>3.2.2</version>
-    </dependency>
-    <dependency>
       <groupId>com.puppycrawl.tools</groupId>
       <artifactId>checkstyle</artifactId>
       <version>10.10.0</version>
@@ -57,23 +56,6 @@
       <artifactId>badger</artifactId>
       <version>1.0.0</version>
     </dependency>
-
-
-    <!-- <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <version>6.1.14</version>
-      <scope>test</scope>
-    </dependency> -->
-
-    <!--
-        <dependency>
-          <groupId>org.mockito</groupId>
-          <artifactId>mockito-core</artifactId>
-          <version>3.9.0</version>
-          <scope>test</scope>
-        </dependency>
-    -->
   </dependencies>
 
   <build>
@@ -100,18 +82,32 @@
       </plugin>
 
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>3.2.2</version>
+        <executions>
+          <execution>
+            <phase>process-classes</phase>
+            <goals>
+              <goal>checkstyle</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+
+      <plugin>
         <groupId>com.github.bordertech.buildtools</groupId>
         <artifactId>badger</artifactId>
         <version>1.0.0</version>
         <executions>
           <execution>
-            <phase>post-site</phase>
+            <phase>compile</phase>
             <goals>
               <goal>badges</goal>
             </goals>
             <configuration>
-              <skip>${badges.skip}</skip>
-              <outputDir>target/site/badges</outputDir>
+              <outputDir>target/site/badges/</outputDir>
               <inputFiles>
                 <inputFile>target/checkstyle-result.xml</inputFile>
               </inputFiles>
