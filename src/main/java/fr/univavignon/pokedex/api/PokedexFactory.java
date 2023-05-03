@@ -11,8 +11,14 @@ package fr.univavignon.pokedex.api;
 public class PokedexFactory implements IPokedexFactory {
 
     /**
+     * Constructor by default.
+     */
+    public PokedexFactory() {
+    }
+
+    /**
      * Creates a new pokedex instance using the given
-     * <tt>metadataProvider</tt> and <tt>pokemonFactory</tt>.
+     * metadataProvider and pokemonFactory.
      *
      * @param metadataProvider Metadata provider the created pokedex will use.
      * @param pokemonFactory Pokemon factory the created pokedex will use.

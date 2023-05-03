@@ -15,10 +15,15 @@ public interface IPokemonFactory {
 	 * @param hp Pokemon HP.
 	 * @param dust Required dust for upgrading pokemon.
 	 * @param candy Required candy for upgrading pokemon.
+	 * @throws PokedexException If index is not valid.
 	 * @return Created pokemon instance.
 	 */
 	Pokemon createPokemon(int index, int cp, int hp, int dust, int candy) throws PokedexException;
 
+	/**
+	 * setter for the pokedex.
+	 * @param pokedex the updated Ipokedex.
+	 */
 	void setPokedex(IPokedex pokedex);
 	
 }

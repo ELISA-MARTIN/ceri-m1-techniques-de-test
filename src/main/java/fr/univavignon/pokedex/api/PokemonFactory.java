@@ -10,12 +10,19 @@ package fr.univavignon.pokedex.api;
 
 public class PokemonFactory implements IPokemonFactory {
 
-    /**
-     * Set of Pokedex.
-     *
-     * @param pokedex The new IPokedex.
-     */
+    /** A pokedex Ipokedex. **/
     IPokedex pokedex;
+
+    /**
+     * Constructor by default.
+     */
+    public PokemonFactory() {
+    }
+
+    /**
+     * setter for the pokedex.
+     * @param pokedex the updated Ipokedex.
+     */
     public void setPokedex(IPokedex pokedex) {
         this.pokedex = pokedex;
     }
