@@ -17,7 +17,7 @@ public class IPokemonFactoryTest {
         pokemonFactory.setPokedex(pokedex);
         Pokemon actualPokemon = pokemonFactory.createPokemon(0, 613, 64, 4000, 4);
 
-
+        assertNotNull(actualPokemon);
         assertEquals(actualPokemon, pokemon);
         assertTrue(actualPokemon instanceof Pokemon); // Vérifie que l'objet retourné est bien un Pokemon
 
