@@ -48,4 +48,10 @@ public class PokemonFactory implements IPokemonFactory {
         return pokemon;
     }
 
-}
+    /*public Pokemon createPokemonv2(int index, int cp, int hp, int dust, int candy) {
+        Pokemon pokemon = pokedex.pokemons.getPokemons(index);
+        Pokemon pokemon = new Pokemon(index, pokedex.pokemons.getPokemons(index))
+    }*/
+
+
+    }
