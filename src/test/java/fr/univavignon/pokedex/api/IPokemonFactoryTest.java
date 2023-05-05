@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 
 public class IPokemonFactoryTest {
 
-    /*@Test
+    @Test
     public void testCreatePokemon() throws PokedexException {
         IPokemonFactory pokemonFactory = Mockito.mock(PokemonFactory.class);
         IPokemonMetadataProvider pokemonMetadataProvider = Mockito.mock(PokemonMetadataProvider.class);
@@ -18,11 +18,10 @@ public class IPokemonFactoryTest {
         pokemonFactory.setPokedex(pokedex);
 
         assertEquals(actualPokemon, pokemon);
-        //assertNotNull(actualPokemon);
         assertTrue(actualPokemon instanceof Pokemon); // Vérifie que l'objet retourné est bien un Pokemon
 
         Mockito.verify(pokemonFactory).createPokemon(0, 613, 64, 4000, 4);
-    }*/
+    }
 
     @Test
     public void testIsBetween0And150() {
