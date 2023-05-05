@@ -10,6 +10,9 @@ import fr.univavignon.pokedex.api.IPokemonFactory;
 import fr.univavignon.pokedex.api.Pokemon;
 
 public class RocketPokemonFactory implements IPokemonFactory {
+
+	/** A pokedex Ipokedex. **/
+	IPokedex pokedex;
 	
 	private static Map<Integer, String> index2name;
 	static {
@@ -56,6 +59,14 @@ public class RocketPokemonFactory implements IPokemonFactory {
 			iv = 1;
 		}
 		return new Pokemon(index, name, attack, defense, stamina, cp, hp, dust, candy, iv);
+	}
+
+	/**
+	 * setter for the pokedex.
+	 * @param pokedex the updated Ipokedex.
+	 */
+	public void setPokedex(IPokedex pokedex) {
+		this.pokedex = pokedex;
 	}
 
 }
