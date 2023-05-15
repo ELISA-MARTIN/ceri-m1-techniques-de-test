@@ -10,6 +10,6 @@ Badge pour la couverture de test: [![codecov](https://codecov.io/gh/ELISA-MARTIN
 
 Badge pour la documentation: [![javadoc](https://javadoc.io/badge2/org.springframework/spring-core/javadoc.svg)](https://javadoc.io/doc/org.springframework/spring-core) 
 
-[![checkstyle](https://checkstyle.io/gh/ELISA-MARTIN\ceri-m1-techniques-de-test\target\site\badges\checkstyle-result.svg)](lien_vers_une_page_ou_informations_supplementaires)
+[![checkstyle](https://checkstyle.io/gh/ELISA-MARTIN\ceri-m1-techniques-de-test\target\site\badges\checkstyle-result.svg)](https://checkstyle.io/gh/ELISA-MARTIN/ceri-m1-techniques-de-test)
 
 
